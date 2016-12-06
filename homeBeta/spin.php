@@ -2,6 +2,10 @@
 $hidden = $_POST["pass"];
 $min = $_POST["min"];
 $max = $_POST["max"];
+//ini_set("display_errors",0);error_reporting(0);
+$keyword = $_POST['keyword'];
+
+
 $table = $_POST['selectTable'];
 $nbannonces = $_POST["nbannonces"];
 if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
@@ -9,6 +13,7 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
     $sqllogin = "root";
     $sqlpassword = "";
 
+    //Connexion à la base de donnée
     $db = @mysql_connect($sqlhost, $sqllogin, $sqlpassword);
     mysql_select_db("serrurier",$db);
 
@@ -26,21 +31,17 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
     $id_min = $id_t_min[0];
     $id_max = $id_t_max[0];
 
-    $nb_lignes = rand($min, $max);
+    //Vérification mot clé saisi
+    if (!empty($keyword)) {
+        $motcle = "and value like '%$keyword%'";
+    } else {
+        $motcle = "";
+    }
 
-    //	while ($data = mysql_fetch_assoc($req)){
-    //		$id = $data["id"];
-    //		if ($id <$id_min){
-    //		  $id_min = $id;
-    //		}
-    //		if ($id >$id_max){
-    //		  $id_max = $id;
-    //		}
-    //	}
-    //    $id_annonce = rand($id_min, $id_max);
 
     // Bouton refesh
-    echo  "<input type='button' onclick='window.location.reload(false)' value='Rafraichir'/> <br><br>";
+    echo  "<input type='button' onclick='window.location.reload(false)' value='Rafraichir'/>";
+    echo  "<a href='formulaire.php'/>RETOUR</a> <br><br>";
 
 
     //	spinning
@@ -52,64 +53,23 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
             $id_string = strval($id_annonce);
             //Vérification si la ligne est déjà sortie
             if(empty(strstr($verif,$id_string))){
-                $sql = "SELECT value from $table where id=$id_annonce;";
+                $sql = "SELECT value from $table where id=$id_annonce $motcle;";
                 $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
                 $data = mysql_fetch_assoc($req);
                 $line = $data["value"];
                 $verif = $verif.$id_string;
                 echo $line.".";
-            } else{ 
-                $sql = "SELECT value from $table where id=$id_annonce;";
-                $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-                $data = mysql_fetch_assoc($req);
-                $line = $data["value"];
-                $verif = $verif.$id_string;
+            } else { 
+                //Si l'id de la value est déjà sortie : 
+                $j--;
             }
         }
         echo "<br/><br/>";
-        //        echo $verif . " " . $id_annonce;
+
     }
 
 
-    //        for ($i=0; $i<$nbannonces; $i++){
-    //            $nb_lignes = rand($min, $max);
-    //            for ($j=0; $j<$nb_lignes; $j++){
-    //                $id_annonce = rand($id_min, $id_max);
-    //                $sql = "SELECT value from $table where id=$id_annonce;";
-    //                $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
-    //                $data = (mysql_fetch_assoc($req));
-    //                $line = $data["value"];
 
-
-    //    for ($i=0; $i<$nbannonces;$i++) {
-    //        $id_annonce = rand($id_min, $id_max);
-    //        $requ = "SELECT value FROM $table WHERE id=$id_annonce;";
-    //        $sqq = mysql_query($requ) or die (mysql_error());
-    //        $tab = mysql_fetch_assoc($sqq);
-    //
-    //    }
-
-    //    for ($i=0;$i<$nbannonces; $i++) {
-    //        $requ = "SELECT value FROM $table WHERE id=$id_annonce;";
-    //        $da= mysql_query($requ) or die (mysql_error());
-    //        $data[$i] = mysql_fetch_assoc($da);
-    //    }
-
-    //    while ($data = mysql_fetch_assoc($req)) {
-    //        $tableau[] = $data['content'];
-    //    }
-
-    //    for ($j=0;$j<$nbannonces; $j++) {
-    //        
-    //        echo $data[$j] . "<br>";
-    //    }
-
-
-
-
-
-
-    //}
     echo "<br/><br/>";
 
 
@@ -121,7 +81,8 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
     echo "<br/><br><strong>Voici le texte venant de la table : </strong>" . $table . "<br>";
     //}
 }else {
-    echo "ERROR";
+    echo "ERROR <br>";
+    echo  "<a href='formulaire.php'/>RETOUR</a> <br><br>";
 
 
 

@@ -1,7 +1,9 @@
 <?php
+ini_set("display_errors",0);error_reporting(0);
 
 $login = "home"; //annonces
 $mdp = "media";
+
 
 if ($login == "home" && $mdp == "media"){
 
@@ -9,6 +11,7 @@ if ($login == "home" && $mdp == "media"){
     $sqllogin = "root";
     $sqlpassword = "";
 
+    //Connexion à la base de donnée
     $db = @mysql_connect($sqlhost, $sqllogin, $sqlpassword);
     mysql_select_db("serrurier",$db);
     $requete = "SELECT TABLES FROM serrurier";
@@ -17,10 +20,7 @@ if ($login == "home" && $mdp == "media"){
     $req = mysql_query($reponse) or die('Erreur SQL !<br>'.$reponse.'<br>'.mysql_error());
     $rep = 'show tables from serrurier';
     $requ = mysql_query($reponse) or die('Erreur SQL !<br>'.$rep.'<br>'.mysql_error());
-    //    $commande = "SHOW TABLES FROM serrurier";
-    //    $rere = mysql_query($commande) or die (mysql_error());
-    //    $tab = mysql_fetch_array($rere);
-    //    $i = 1;
+
 
     //affichage
     echo "<html>";
@@ -29,7 +29,7 @@ if ($login == "home" && $mdp == "media"){
 Copiez collez vos pragraphes dans la boite ci-dessous:<br/>";
     echo "<form method='post' action='add.php'>";
     echo "<textarea name='lines' value='' cols='80' rows='20' /></textarea><br/>";
-    echo "<input type='submit' value='Envoyer' /> <br><br>";
+    echo "<input type='submit' value='Envoyer'/> <br><br>";
     echo "Choisir le thème du texte :";
     echo "<select name='selectTable'>";
     while ($donnees = mysql_fetch_assoc($req))
@@ -52,6 +52,7 @@ Copiez collez vos pragraphes dans la boite ci-dessous:<br/>";
     echo "<form method='post' action='spin.php'>";
     echo "Nombre de lignes par annonce: entre <input type='text' name='min' size='3'/> et <input type='text' name='max' size='3'/>";
     echo "<br/>Nombre d'annonces d&eacute;sir&eacute;es: <input type='text' name='nbannonces'/>";
+    echo "<br>Selection mot clé :  <input type='text' name='keyword' />";
     echo "<input type='hidden' name='pass' value='rococo1298734563587racaca' />";
     echo "<br>Choisir le thème du texte :";
     echo "<br><select name='selectTable'>";
@@ -86,6 +87,6 @@ $commande = "CREATE TABLE IF NOT EXISTS `$newTable` (
   `nbespace` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 )";
-$req = mysql_query($commande) or die ('Erreur SQL ! ' . mysql_error());
+$req = mysql_query($commande);
 mysql_close();
 ?>

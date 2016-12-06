@@ -4,8 +4,7 @@ $table = $_POST['selectTable'];
 $bd = @mysql_connect("127.0.0.1", "root", "");
 mysql_select_db("serrurier", $bd);
 
-//$requete = "INSERT INTO $table VALUES (NULL, '".$texte."');";
-//$sql = mysql_query($requete) or die('Erreur SQL !'.mysql_error());
+
 
 //Déclaration fonction
 function paragrapheToLines($paragraphe){
@@ -26,8 +25,7 @@ if (!empty($lines_textarea)) {
             $line = $lines[$j];
             preg_replace("/^ /", "", $line);
 
-            //$line = str_replace("'", "\'", $line);
-            //echo $line;
+
             $line = addslashes($line);
             $line = ucfirst($line);
             $espace = mb_substr_count($line, " ");
@@ -39,6 +37,7 @@ if (!empty($lines_textarea)) {
     }
     echo "Vous avez bien ajouté du texte sur la table : " . $table . "<br>";
     echo "<a href='formulaire.php'>RETOUR</a>";
+    //Si le champ est vide cela renvoit un message comme quoi le champ est vide
 } else {
     echo "Champ de texte vide !";
     echo "<br> <a href='formulaire.php'>RETOUR</a>";

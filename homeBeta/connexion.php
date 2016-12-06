@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <html>
 <form method="POST" action="formulaire.php">
 Login: <input type="text" name="login" value="" /> <br/>
