@@ -64,13 +64,13 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
                 $j--;
             }
         }
-        echo "<br/><br/>";
+//        echo "<br/><br/>";
 
     }
 
 
 
-    echo "<br/><br/>";
+//    echo "<br/><br/>";
 
 
 
@@ -89,6 +89,7 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
 
 
 }
-
-
 ?>
+
+
+<!--Imaginé et développé par Raid333-->

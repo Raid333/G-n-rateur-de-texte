@@ -35,7 +35,7 @@ if (!empty($lines_textarea)) {
             }
         }
     }
-    echo "Vous avez bien ajouté du texte sur la table : " . $table . "<br>";
+    echo "Vous avez bien ajouté ". count($lines). " lignes sur la table : " . $table . "<br>";
     echo "<a href='formulaire.php'>RETOUR</a>";
     //Si le champ est vide cela renvoit un message comme quoi le champ est vide
 } else {

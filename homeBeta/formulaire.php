@@ -90,3 +90,4 @@ $commande = "CREATE TABLE IF NOT EXISTS `$newTable` (
 $req = mysql_query($commande);
 mysql_close();
 ?>
+<!--Imaginé et développé par Raid333-->
