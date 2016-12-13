@@ -12,7 +12,8 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
     $sqlhost = "127.0.0.1";
     $sqllogin = "root";
     $sqlpassword = "";
-
+    $str1 = $_POST['str1'];
+    $str2 = $_POST['str2'];
     //Connexion à la base de donnée
     $db = @mysql_connect($sqlhost, $sqllogin, $sqlpassword);
     mysql_select_db("serrurier",$db);
@@ -40,8 +41,7 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
 
 
     // Bouton refesh
-    echo  "<input type='button' onclick='window.location.reload(false)' value='Rafraichir'/>";
-    echo  "<a href='formulaire.php'/>RETOUR</a> <br><br>";
+    echo  "<input type='button' onclick='window.location.reload(false)' value='Rafraichir'/><br><br>";
 
 
     //	spinning
@@ -58,19 +58,20 @@ if ((strcmp($hidden,"rococo1298734563587racaca")==0) && $min > 0 && $max > 1){
                 $data = mysql_fetch_assoc($req);
                 $line = $data["value"];
                 $verif = $verif.$id_string;
-                echo $line.".";
+                $remplace =  str_ireplace($str1,$str2,$line);
+                echo $remplace . ".";
             } else { 
                 //Si l'id de la value est déjà sortie : 
                 $j--;
             }
         }
-//        echo "<br/><br/>";
+        echo "<br/><br/>";
 
     }
 
 
 
-//    echo "<br/><br/>";
+    //    echo "<br/><br/>";
 
 
 

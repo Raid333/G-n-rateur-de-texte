@@ -33,7 +33,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     <header>
 
 
-                        <form method="POST" action="formulaire.php">
+                        <form method="POST" action="multitable.php">
                             Utilisateur: <input type="text" name="login" value="" /> <br/>
                             Mot de passe: <input type="password" name="mdp" value="" /> <br/>
                             <input type='submit' value='Connexion' />

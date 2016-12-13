@@ -1,9 +1,8 @@
 <?php
-ini_set("display_errors",0);error_reporting(0);
+ini_set("display_errors",1);error_reporting(0);
 
-$login = "home"; //annonces
-$mdp = "media";
-
+$login = $_POST['login'];
+$mdp = $_POST['mdp'];
 
 if ($login == "home" && $mdp == "media"){
 
@@ -23,6 +22,7 @@ if ($login == "home" && $mdp == "media"){
 
 
     //affichage
+    echo "<meta charset=\"UTF-8\">";
     echo "<html>";
     echo "<center>
 <h2>Upload de nouvelles lignes</h2>
@@ -44,15 +44,18 @@ Copiez collez vos pragraphes dans la boite ci-dessous:<br/>";
     echo "<form action='formulaire.php' method='post'/>";
     echo "Ajouter une table :";
     echo "<input name='nameTable' type='text'/>";
+    echo "<input type='hidden' name='login' value='home' />";
+    echo "<input type='hidden' name='mdp' value='media' />";
     echo "<input type='submit' />";
     echo "</form>";
     echo "<hr width='100%'/>";
     echo "<br/>";
     echo "<h2>Spinner des lignes en base</h2>";
     echo "<form method='post' action='spin.php'>";
-    echo "Nombre de lignes par annonce: entre <input type='text' name='min' size='3'/> et <input type='text' name='max' size='3'/>";
-    echo "<br/>Nombre d'annonces d&eacute;sir&eacute;es: <input type='text' name='nbannonces'/>";
+    echo "Nombre de lignes par annonce: entre <input type='number' name='min' size='3'/> et <input type='number' name='max' size='1'/>";
+    echo "<br/>Nombre d'annonces d&eacute;sir&eacute;es: <input type='number' name='nbannonces'/>";
     echo "<br>Selection mot clé :  <input type='text' name='keyword' />";
+    echo "<br> Remplacer le mot : <input type='text' name='str1' /> par le mot : <input type='text' name='str2' />";
     echo "<input type='hidden' name='pass' value='rococo1298734563587racaca' />";
     echo "<br>Choisir le thème du texte :";
     echo "<br><select name='selectTable'>";
@@ -78,6 +81,7 @@ Copiez collez vos pragraphes dans la boite ci-dessous:<br/>";
 
 else{
     echo "Erreur de login ou mot de pass";
+    echo "<br><a href='connexion.php'>Se connecter</a>";
 }
 $nameTable = $_POST['nameTable'];
 $newTable = str_replace(" ","_", $nameTable);
@@ -90,4 +94,3 @@ $commande = "CREATE TABLE IF NOT EXISTS `$newTable` (
 $req = mysql_query($commande);
 mysql_close();
 ?>
-<!--Imaginé et développé par Raid333-->
